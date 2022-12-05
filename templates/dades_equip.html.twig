@@ -1,0 +1,36 @@
+<h1 id="titolEquip">Dades equip {{codi}}</h1>
+{% if contactes %}
+
+<div id="paragrafEquip">
+<img class="imatgeEquip" src="{{asset(contactes.foto)}}"/>
+<div class="contactes">
+    Codi: {{codi}}
+</div>
+<div class="contactes">
+    Nom: {{contactes.nom}}
+</div>
+<div class="contactes">
+    Cicle: {{contactes.cicle}}
+</div>
+<div class="contactes">
+    Curs: {{contactes.curs}}
+</div>
+<div class="contactes">
+    Membres:
+    {% for contacte in contactes.membres %}
+    <div class="contacte">
+        {{contacte| upper}}
+   </div>
+    {% endfor %}
+</div>
+</div>
+
+{% else %}
+<div id="paragrafEquip">
+<img class="imatgeEquip" src="{{ asset('Green/assets/img/roger.jpg') }}" />
+
+</div>
+<div id="paragrafEquip">
+<h2 id="no_trobat">Equip no trobat</h2>
+</div>
+{% endif %}

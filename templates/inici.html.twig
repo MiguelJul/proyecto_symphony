@@ -1,0 +1,25 @@
+
+{% extends 'base.html.twig' %}
+{% block title %}Equips{% endblock %}
+{% block stylesheets %}
+{{ parent() }}
+ <link href="{{ asset('Green/assets/css/estilsInici.css') }}" rel="stylesheet">
+{% endblock %}
+{% block header %}
+{{ parent() }}
+{%endblock%}
+{% block body %}
+<body>
+<h1 id="titolInici">Projecte Symphony Equips 2n DAW </h1>
+<p id="paragrafInici">Inicio programa gestió d'equips del projecte.<br/>
+IES Lluis Simarro 
+Curs 22/23<br/>
+<a href ="{{ path('dades_equip') }}/4">
+<img class="imatgeInici" src="{{ asset('Green/assets/img/Stormtrooper.jpg') }}"/></a>
+</p>
+</body>
+{%endblock%}
+
+{% block footer %}
+{{ parent() }}
+{%endblock%}
