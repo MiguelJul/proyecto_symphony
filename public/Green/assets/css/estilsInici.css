@@ -1,6 +1,5 @@
 body{
  background-color: lightgreen;
- 
 }
 
 h1#titolInici {
@@ -13,7 +12,8 @@ h1#titolInici {
     background-color:white;
     }
 
-p#paragrafInici{
+#paragrafInici{
+position: relative;
 width: 80%;
 border: solid black 1px;
 margin: 10px auto;
@@ -23,7 +23,27 @@ background-color:#f2e7c3;
 }
 
 .imatgeInici{
-    width: 500px;
+    width: 35%;
     margin: 10px;
-    }
-   
+}
+
+.llistat-equips{
+    border:2px solid black;
+    margin: 5px auto ;
+    width:20%;
+    background-color: olive;
+    padding: 10px;
+}
+
+.llistat-equips a {
+    color: #444444;
+}
+
+.llistat-equips a:hover {
+    
+    color: #5cb874;
+}
+
+#titol-llistat{
+    color:mediumblue;
+}

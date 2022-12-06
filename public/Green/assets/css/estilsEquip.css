@@ -13,6 +13,7 @@ h1#titolEquip {
     }
 
 div#paragrafEquip{
+position: relative;
 width: 80%;
 border: solid black 1px;
 margin: 10px auto;
@@ -22,7 +23,7 @@ background-color:#f2e7c3;
 }
 
 .imatgeEquip{
-    width: 31%;
+    width: 35%;
     margin: 10px;
     }
 
@@ -50,3 +51,6 @@ h2#no_trobat{
     color:#5cb874;
 }
 
+#titol-imatge{
+    color:rgb(139, 3, 3);
+}

@@ -8,11 +8,12 @@
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
-html {
-  min-height: 100%;
-  position: relative;
-}
+
 body {
+  margin:0;
+  padding-bottom:310px;
+  min-height: 100vh;
+  position: relative;
   font-family: "Open Sans", sans-serif;
   color: #444444;
 

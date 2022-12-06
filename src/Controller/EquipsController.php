@@ -1,11 +1,12 @@
 <?php
 namespace App\Controller;
+use App\Service\ServeiDadesEquips;  
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class EquipsController extends AbstractController
 {
-private $equips = array(
+/*private $equips = array(
     array("codi" => "1", "nom" => "Equip Roig", "cicle" =>"DAW",
     "curs" =>"22/23", "membres" =>
     array("Elena","Vicent","Joan","Maria"),"foto"=>"Green/assets/img/rojo.jpg"),
@@ -18,11 +19,17 @@ private $equips = array(
     array("codi" => "4", "nom" => "Equip Negre", "cicle" =>"ASIX",
     "curs" =>"22/23", "membres" =>
     array("Marc","Sara","Roman","Aitor"),"foto"=>"Green/assets/img/negro.jpg")
-);
-
+); */
+private $dadesEquips;
+private $equips;
+public function __construct($dadesEquips)
+{
+$this->equips = $dadesEquips->get();
+}
 #[Route('/equip/{codi}' ,name:'dades_equip', requirements: ['codi' => '\d+'])]
 public function fitxa($codi=1)
 {
+
 $resultat = array_filter($this->equips,
 function($equip) use ($codi)
 {

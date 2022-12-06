@@ -2,7 +2,10 @@
 {% if contactes %}
 
 <div id="paragrafEquip">
-<img class="imatgeEquip" src="{{asset(contactes.foto)}}"/>
+Projecte 2n DAW <br/>
+<h2 id="titol-imatge">Imatge Equip</h2>
+<img class="imatgeEquip" src="{{asset(contactes.foto)}}"/> <!-- No utilitze la virgurilla perque he ficat la ruta relativa directament en la variable contactes.foto,
+                                                                pero sino seria src="{{asset('Green/assets/img/'~contactes.foto)}} !-->
 <div class="contactes">
     Codi: {{codi}}
 </div>
