@@ -12,6 +12,16 @@ h1#titolInici {
     background-color:white;
     }
 
+h2#titolSecundari{
+    width: 50%;
+    color: red;
+    border: solid red 1px;
+    margin: 10px auto;
+    text-align:center;
+    padding:10px;
+    background-color:white;
+    }
+
 #paragrafInici{
 position: relative;
 width: 80%;
@@ -47,3 +57,21 @@ background-color:#f2e7c3;
 #titol-llistat{
     color:mediumblue;
 }
+
+.exception{
+    border:2px solid red;
+    padding: 5px;
+    background-color: lightblue;
+    width:55%;
+    margin: auto;
+}
+
+#paragrafInici a:hover{
+    color:#5cb874;
+}
+
+#paragrafInici a{
+    margin: auto;
+    width:fit-content;
+}
+

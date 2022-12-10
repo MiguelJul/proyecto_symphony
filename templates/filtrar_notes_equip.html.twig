@@ -9,6 +9,7 @@
 {{ parent() }}
 {%endblock%}
 {% block body %}
+{% if equips %}
 <body>
 <h1 id="titolInici">Projecte Symphony Equips 2n DAW </h1>
 <p id="paragrafInici">Inicio programa gestió d'equips del projecte.<br/>
@@ -20,26 +21,27 @@ Curs 22/23<br/>
 <div id="paragrafInici"><h2 id="titol-llistat">Lista d'equips</h2></div>
 
     <div id="paragrafInici">
-    <!--<div class="llistat-equips">
-        <a href ="{{ path('dades_equip') }}">Equip Roig</a>
-    </div>
-     <div class="llistat-equips">
-        <a href ="{{ path('dades_equip') }}/2"> Equip Blau</a>
-    </div>
-     <div class="llistat-equips">
-         <a href ="{{ path('dades_equip') }}/3 ">Equip Groc</a>
-    </div>
-    <div class="llistat-equips">
-        <a href ="{{ path('dades_equip') }}/4"> Equip Negre</a>
-    </div>-->
     {% for equip in equips %}
      <div class="llistat-equips">
-        <a href ="{{ path('dades_equip') }}/{{equip.getId}}"> {{equip.getNom}}</a>
+        <a href ="{{ path('dades_equip') }}/{{equip.getId}}"> {{equip.getNom}}(nota:{{equip.getNota}})</a>
     </div>
     {% endfor %}
 </div> 
 
 </body>
+{% else %}
+   <body>
+<h1 id="titolInici">Projecte Symphony Equips 2n DAW </h1>
+<p id="paragrafInici">Inicio programa gestió d'equips del projecte.<br/>
+IES Lluis Simarro 
+Curs 22/23<br/>
+<a href ="{{ path('dades_equip') }}/4">
+<img class="imatgeInici" src="{{ asset('Green/assets/img/Stormtrooper.jpg') }}"/></a>
+</p>
+<div id="paragrafInici"><h2 id="titol-llistat">Lista d'equips</h2></div>
+<div id="paragrafInici"><h2 id="titol-llistat">No s'han trobat equips</h2></div>
+</body>
+{% endif %}
 {%endblock%}
 
 {% block footer %}

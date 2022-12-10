@@ -51,6 +51,11 @@ h2#no_trobat{
     color:#5cb874;
 }
 
+#paragrafEquip a{
+    margin: auto;
+    width:fit-content;
+}
+
 #titol-imatge{
     color:rgb(139, 3, 3);
 }

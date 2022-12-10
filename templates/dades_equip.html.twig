@@ -1,31 +1,27 @@
 <h1 id="titolEquip">Dades equip {{codi}}</h1>
-{% if contactes %}
+{% if equip %}
 
 <div id="paragrafEquip">
 Projecte 2n DAW <br/>
 <h2 id="titol-imatge">Imatge Equip</h2>
-<img class="imatgeEquip" src="{{asset(contactes.foto)}}"/> <!-- No utilitze la virgurilla perque he ficat la ruta relativa directament en la variable contactes.foto,
-                                                                pero sino seria src="{{asset('Green/assets/img/'~contactes.foto)}} !-->
+<img class="imatgeEquip" src="{{asset(equip.getImatge)}}"/> <!-- No utilitze la virgurilla perque he ficat la ruta relativa directament en la variable contactes.foto,
+                                                                pero sino seria src="{{asset('Green/assets/img/'~equip.getImatge)}} !-->
 <div class="contactes">
     Codi: {{codi}}
 </div>
 <div class="contactes">
-    Nom: {{contactes.nom}}
+    Nom: {{equip.getNom}}
 </div>
 <div class="contactes">
-    Cicle: {{contactes.cicle}}
+    Cicle: {{equip.getCicle}}
 </div>
 <div class="contactes">
-    Curs: {{contactes.curs}}
+    Curs: {{equip.getCurs}}
 </div>
 <div class="contactes">
-    Membres:
-    {% for contacte in contactes.membres %}
-    <div class="contacte">
-        {{contacte| upper}}
-   </div>
-    {% endfor %}
+    Nota: {{equip.getNota}}
 </div>
+
 </div>
 
 {% else %}

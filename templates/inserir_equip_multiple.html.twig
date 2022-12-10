@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+{% block title %}Equips{% endblock %}
+{% block stylesheets %}
+{{ parent() }}
+ <link href="{{ asset('Green/assets/css/estilsInici.css') }}" rel="stylesheet">
+{% endblock %}
+{% block header %}
+{{ parent() }}
+{%endblock%}
+{% block body %}
+{% if error %}
+   <body>
+<h1 id="titolInici">Projecte Symphony Equips 2n DAW </h1>
+<h2 id="titolSecundari">Error en la inserció dels equips <br/>
+    {% for equip in equips %}
+ {{equip.getNom}}<br/>
+    {% endfor %}
+</h2>
+<div id="paragrafInici">
+<img class="imatgeInici" src="{{ asset('Green/assets/img/vader.jpg') }}"/></br>
+    <div class="exception">{{error}}</div>
+</div>
+<div id="paragrafInici"><a class="nav-link" href ="{{ path('inici') }}">Tornar a l'inici</a></div>
+</body>
+{% else %}
+   <body>
+<h1 id="titolInici">Projecte Symphony Equips 2n DAW </h1>
+<h2 id="titolSecundari">Equips:<br/>
+{% for equip in equips %}
+ {{equip.getNom}} amb id: {{equip.getId}} <br/>
+{% endfor %}
+Inserits correctament
+</h2>
+<p id="paragrafInici">
+<img class="imatgeInici" src="{{ asset('Green/assets/img/yoda.jpg') }}"/>
+</p>
+<div id="paragrafInici"><a class="nav-link" href ="{{ path('inici') }}">Tornar a l'inici</a></div>
+</body>
+{% endif %}
+{%endblock%}
+
+{% block footer %}
+{{ parent() }}
+{%endblock%}
