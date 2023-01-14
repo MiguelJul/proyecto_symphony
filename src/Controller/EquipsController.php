@@ -6,6 +6,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\HttpFoundation\Request;
+
 class EquipsController extends AbstractController
 {
 /*private $equips = array(
@@ -103,7 +109,7 @@ public function inserir(ManagerRegistry $doctrine)
     $equip->setCicle("DAW");
     $equip->setCurs("22/23");
     $equip->setNota(9);
-    $equip->setImatge("Green/assets/img/sith.jpg");
+    $equip->setImatge("Green/assets/img/equips/sith.jpg");
     $entityManager->persist($equip);
     try{
     $entityManager->flush();
@@ -125,7 +131,7 @@ public function inserirmultiple(ManagerRegistry $doctrine)
     $equip1->setCicle("DAW");
     $equip1->setCurs("22/23");
     $equip1->setNota(5.25);
-    $equip1->setImatge("Green/assets/img/rojo.jpg");
+    $equip1->setImatge("Green/assets/img/equips/rojo.jpg");
     $entityManager->persist($equip1);
 
     $equip2 = new equip();
@@ -133,7 +139,7 @@ public function inserirmultiple(ManagerRegistry $doctrine)
     $equip2->setCicle("DAM");
     $equip2->setCurs("22/23");
     $equip2->setNota(4.4);
-    $equip2->setImatge("Green/assets/img/azul.jpg");
+    $equip2->setImatge("Green/assets/img/equips/azul.jpg");
     $entityManager->persist($equip2);
 
     $equip3 = new equip();
@@ -141,7 +147,7 @@ public function inserirmultiple(ManagerRegistry $doctrine)
     $equip3->setCicle("ASIR");
     $equip3->setCurs("22/23");
     $equip3->setNota(7.8);
-    $equip3->setImatge("Green/assets/img/verde.jpeg");
+    $equip3->setImatge("Green/assets/img/equips/verde.jpeg");
     $entityManager->persist($equip3);
 
     $equip4 = new equip();
@@ -149,7 +155,7 @@ public function inserirmultiple(ManagerRegistry $doctrine)
     $equip4->setCicle("ASIX");
     $equip4->setCurs("22/23");
     $equip4->setNota(3.7);
-    $equip4->setImatge("Green/assets/img/negro.jpg");
+    $equip4->setImatge("Green/assets/img/equips/negro.jpg");
     $entityManager->persist($equip4);
 
     $equips=array($equip1,$equip2,$equip3,$equip4);
@@ -163,6 +169,68 @@ public function inserirmultiple(ManagerRegistry $doctrine)
             'equips' => $equips, "error"=>$error));
     }
 }
+
+#[Route('/equip/nou/' ,name:'nou_equip')]
+    public function nou(ManagerRegistry $doctrine, Request $request)
+    {
+        $error=null;
+        $equip = new Equip();
+        $formulari = $this->createFormBuilder($equip)
+        ->add('nom', TextType::class)
+        ->add('cicle', TextType::class)
+        ->add('curs', TextType::class)
+        ->add('imatge',FileType::class,array('required' => false))
+        ->add('nota', NUmberType::class)
+        ->add('save', SubmitType::class, array('label' => 'Enviar'))
+        ->getForm();
+        
+        $formulari->handleRequest($request);
+        if ($formulari->isSubmitted() && $formulari->isValid()) {
+            $fitxer = $formulari->get('imatge')->getData();
+            if ($fitxer) { // si s’ha indicat un fitxer al formulari
+            $nomFitxer = "Green/assets/img/equips/".$fitxer->getClientOriginalName();
+            //ruta a la carpeta de les imatges d’equips, relativa a index.php
+            //aquest directori ha de tindre permisos d’escriptura
+            $directori =
+            $this->getParameter('kernel.project_dir')."/public/Green/assets/img/equips";
+            try {
+            $fitxer->move($directori,$nomFitxer);
+            } catch (FileException $e) {
+
+                $error=$e->getMessage();
+        return $this->render('nou_equip.html.twig', array(
+            'formulari' => $formulari->createView(), "error"=>$error));
+
+            }
+            $equip->setImatge($nomFitxer); // valor del camp imatge
+            } else {//no hi ha fitxer, imatge per defecte
+            $equip->setImatge('Green/assets/img/equips/equipPerDefecte.jpg');
+            }
+
+            //hem d’assignar els camps de l’equip 1 a 1
+            $equip->setNom($formulari->get('nom')->getData());
+            $equip->setCicle($formulari->get('cicle')->getData());
+            $equip->setCurs($formulari->get('curs')->getData());
+            $equip->setNota($formulari->get('nota')->getData());
+            $entityManager = $doctrine->getManager();
+            $entityManager->persist($equip);
+            try{
+            $entityManager->flush();
+            return $this->redirectToRoute('inici');
+
+            }catch (\Exception $e) {
+
+                $error=$e->getMessage();
+        return $this->render('nou_equip.html.twig', array(
+            'formulari' => $formulari->createView(), "error"=>$error));
+
+            }
+
+        }else{
+            return $this->render('nou_equip.html.twig',
+            array('formulari' => $formulari->createView(),"error"=>$error));
+        }
+    }
 }
 ?>
 
