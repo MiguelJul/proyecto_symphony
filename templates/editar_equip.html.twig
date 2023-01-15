@@ -1,5 +1,5 @@
 {% extends 'base.html.twig' %}
-{% block title %}Añadir membre{% endblock %}
+{% block title %}Editar equipo{% endblock %}
 {% block stylesheets %}
 {{ parent() }}
  <link href="{{ asset('Green/assets/css/estilsEquip.css') }}" rel="stylesheet">
@@ -8,17 +8,17 @@
 {{ parent() }}
 {%endblock%}
 {% block body %}
+ <div id="paragrafEquip">
 {% if error %}
 <div class="exception">{{error}}</div>
 {% endif %}
-    <div id="paragrafEquip">
-        <h1>Nuevo miembro</h1>
-        {{ form_start(formulari) }}
-        {{ form_widget(formulari) }}
-        {{ form_end(formulari) }}
+    <h1>Editar equipo</h1>
+    {{ form_start(formulari) }}
+    {{ form_widget(formulari) }}
+    {{ form_end(formulari) }}
     </div>
+     <div id="paragrafEquip"><img class="imatgeEquip" src="{{ asset(imatge)}}"/></div>
     <div id="paragrafEquip"><a class="nav-link" href ="{{ path('inici') }}">Tornar a l'inici</a></div>
-
 {%endblock%}
 
 {% block footer %}

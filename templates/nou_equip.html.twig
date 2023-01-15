@@ -11,10 +11,12 @@
 {% if error %}
 <div class="exception">{{error}}</div>
 {% endif %}
-    <h1>Nuevo contacto</h1>
-    {{ form_start(formulari) }}
-    {{ form_widget(formulari) }}
-    {{ form_end(formulari) }}
+    <div id="paragrafEquip">
+        <h1>Nuevo equipo</h1>
+        {{ form_start(formulari) }}
+        {{ form_widget(formulari) }}
+        {{ form_end(formulari) }}
+    </div>
     <div id="paragrafEquip"><a class="nav-link" href ="{{ path('inici') }}">Tornar a l'inici</a></div>
 
 {%endblock%}

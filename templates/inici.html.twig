@@ -34,7 +34,7 @@ Curs 22/23<br/>
     </div>-->
     {% for equip in equips %}
      <div class="llistat-equips">
-        <a href ="{{ path('dades_equip') }}/{{equip.getId}}"> {{equip.getNom}}</a>
+        <a href ="{{ path('dades_equip') }}/{{equip.getId}}"> {{equip.getNom}} (nota:{{equip.getNota}}) <a class="lapiz" href ="{{ path('edicio_equip') }}/{{equip.getId}}"><img class="lapiz" src="{{ asset('Green/assets/img/decoracio/lapiz.png') }}" /></a></a>
     </div>
     {% endfor %}
 </div> 
