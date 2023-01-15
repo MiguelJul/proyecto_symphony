@@ -1,5 +1,5 @@
 {% extends 'base.html.twig' %}
-{% block title %}Añadir equipo{% endblock %}
+{% block title %}Añadir membre{% endblock %}
 {% block stylesheets %}
 {{ parent() }}
  <link href="{{ asset('Green/assets/css/estilsEquip.css') }}" rel="stylesheet">
@@ -11,7 +11,7 @@
 {% if error %}
 <div class="exception">{{error}}</div>
 {% endif %}
-    <h1>Nuevo contacto</h1>
+    <h1>Nuevo miembro</h1>
     {{ form_start(formulari) }}
     {{ form_widget(formulari) }}
     {{ form_end(formulari) }}
