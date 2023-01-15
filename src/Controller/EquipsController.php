@@ -265,7 +265,7 @@ public function inserirmultiple(ManagerRegistry $doctrine)
 
                 $error=$e->getMessage();
         return $this->render('editar_equip.html.twig', array(
-            'formulari' => $formulari->createView(), "error"=>$error));
+            'formulari' => $formulari->createView(), "error"=>$error, "imatge"=>$equip->getImatge()));
 
             }
             $equip->setImatge($nomFitxer); // valor del camp imatge
@@ -286,7 +286,7 @@ public function inserirmultiple(ManagerRegistry $doctrine)
 
                 $error=$e->getMessage();
         return $this->render('editar_equip.html.twig', array(
-            'formulari' => $formulari->createView(), "error"=>$error));
+            'formulari' => $formulari->createView(), "error"=>$error,"imatge"=>$equip->getImatge()));
 
             }
 
