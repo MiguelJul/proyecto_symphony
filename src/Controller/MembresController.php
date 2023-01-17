@@ -54,11 +54,11 @@ class MembresController extends AbstractController
         ->add('nom', TextType::class)
         ->add('cognoms', TextType::class)
         ->add('email', TextType::class)
-        ->add('dataNaiximent', DateType::class)
+        ->add('dataNaiximent', DateType::class, ['years'=>range(1920,2022)])
         ->add('imatgePerfil',FileType::class,array('required' => false))
         ->add('equip', EntityType::class, array('class' =>
         Equip::class,'choice_label' => 'nom',))
-        ->add('nota', NUmberType::class)
+        ->add('nota', NumberType::class)
         ->add('save', SubmitType::class, array('label' => 'Enviar'))
         ->getForm();
         
@@ -122,11 +122,11 @@ class MembresController extends AbstractController
         ->add('nom', TextType::class)
         ->add('cognoms', TextType::class)
         ->add('email', TextType::class)
-        ->add('dataNaiximent', DateType::class)
+        ->add('dataNaiximent', DateType::class, ['years'=>range(1920,2022)])
         ->add('imatgePerfil',FileType::class,['mapped' => false,'required' => false])
         ->add('equip', EntityType::class, array('class' =>
         Equip::class,'choice_label' => 'nom',))
-        ->add('nota', NUmberType::class)
+        ->add('nota', NumberType::class)
         ->add('save', SubmitType::class, array('label' => 'Enviar'))
         ->getForm();
         

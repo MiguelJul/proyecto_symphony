@@ -180,7 +180,7 @@ public function inserirmultiple(ManagerRegistry $doctrine)
         ->add('cicle', TextType::class)
         ->add('curs', TextType::class)
         ->add('imatge',FileType::class,array('required' => false))
-        ->add('nota', NUmberType::class)
+        ->add('nota', NumberType::class)
         ->add('save', SubmitType::class, array('label' => 'Enviar'))
         ->getForm();
         
@@ -243,7 +243,7 @@ public function inserirmultiple(ManagerRegistry $doctrine)
         ->add('cicle', TextType::class)
         ->add('curs', TextType::class)
         ->add('imatge',FileType::class, ['mapped' => false,'required' => false])
-        ->add('nota', NUmberType::class)
+        ->add('nota', NumberType::class)
         ->add('save', SubmitType::class, array('label' => 'Enviar'))
         ->getForm();
         
