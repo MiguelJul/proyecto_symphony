@@ -8,7 +8,7 @@
 {{ parent() }}
 {%endblock%}
 {% block body %}
-    {{ include ('dades_equip.html.twig', {'equip': equip, 'codi':codi }) }}
+    {{ include ('dades_equip.html.twig', {'equip': equip, 'codi':codi,'membres': membres }) }}
     <div id="paragrafEquip">
     <a class="nav-link" href ="{{ path('inici') }}">Tornar a l'inici</a>
     <a class="lapiz" href ="{{ path('edicio_equip') }}/{{equip.getId}}">Editar l'equip<img class="lapiz" src="{{ asset('Green/assets/img/decoracio/lapiz.png') }}" /></a></div>

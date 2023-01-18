@@ -39,6 +39,15 @@ class MembreRepository extends ServiceEntityRepository
         }
     }
 
+    public function findByEquipName($nom): array
+        {
+        $qb = $this->createQueryBuilder('e')
+        ->andWhere('e.Equip ==:nom')
+        ->setParameter('nom', $nom)
+        ->getQuery();
+        return $qb->execute();
+        }
+
 //    /**
 //     * @return Membre[] Returns an array of Membre objects
 //     */

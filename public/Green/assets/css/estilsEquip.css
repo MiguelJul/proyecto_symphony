@@ -59,3 +59,14 @@ h2#no_trobat{
 #titol-imatge{
     color:rgb(139, 3, 3);
 }
+#paragrafEquip li{
+    color:rgb(68, 190, 139);
+    border:1px solid black;
+    margin:10px auto;
+    background-color: lightgray;
+    list-style:none; 
+    text-decoration: none;
+}
+
+
+

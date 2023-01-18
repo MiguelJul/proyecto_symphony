@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller;
 use App\Entity\Equip;
+use App\Entity\Membre;
 use App\Service\ServeiDadesEquips;  
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -41,19 +42,27 @@ $this->equips = $dadesEquips->get();
     public function fitxa(ManagerRegistry $doctrine,$codi=1)
     {
     $repositori = $doctrine->getRepository(Equip::class);
+    $repositori2 = $doctrine->getRepository(Membre::class);
     $equip = $repositori->find($codi);
+    $membres=$repositori2->findAll();
+    /*foreach ($repositori2 as $membre){
+        echo ($membre);
+        if($membre.getEquip()==$equip.getNom())
+        array_push($membres,$membre);
+    }*/
     /*
     $resultat = array_filter($this->equips,
     function($equip) use ($codi)
     {
     return $equip["codi"] == $codi;
     });*/
-
-    if ($equip!=null)
-    return $this->render('equip.html.twig', array('equip'=>$equip,'codi'=>$codi));
+    
+    if ($equip!=null){
+    return $this->render('equip.html.twig', array('equip'=>$equip,'codi'=>$codi,'membres'=>$membres));
+    }
     else
     return $this->render('equip.html.twig', array(
-        'equip' => NULL,'codi'=>NULL));
+        'equip' => NULL,'codi'=>NULL,'membres'=>NULL));
 }
 
 

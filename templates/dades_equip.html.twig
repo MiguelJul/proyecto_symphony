@@ -6,6 +6,11 @@ Projecte 2n DAW <br/>
 <h2 id="titol-imatge">Imatge Equip</h2>
 <img class="imatgeEquip" src="{{asset(equip.getImatge)}}"/> <!-- No utilitze la virgurilla perque he ficat la ruta relativa directament en la variable contactes.foto,
                                                                 pero sino seria src="{{asset('Green/assets/img/equips'~equip.getImatge)}} !-->
+</div>
+<div id="paragrafEquip">
+<div class="nou_membre">
+<a class="lapiz" href ="{{ path('nou_membre') }}"><img class="r2d2" src="{{ asset('Green/assets/img/decoracio/r2d2.jpg') }}"/> Nou membre d'equip </a></li> 
+</div>
 <div class="contactes">
     Codi: {{codi}}
 </div>
@@ -21,7 +26,23 @@ Projecte 2n DAW <br/>
 <div class="contactes">
     Nota: {{equip.getNota}}
 </div>
-
+<div class="contactes">
+   {% if membres %}
+   {% set comptador = 0 %}
+   Membres:
+   {% for membre in membres %}
+   {% if membre.getEquip.nom == equip.getNom %}
+   {% set comptador = comptador +1 %}
+   <li>{{ membre.nom }} <a class="lapiz" href ="{{ path('edicio_membre') }}/{{membre.getId}}"><img class="lapiz" src="{{ asset('Green/assets/img/decoracio/lapiz.png') }}" /></a></li>
+   {% endif %}
+    {% endfor %}
+    {% if comptador == 0 %}
+    Encara no hi ha membres
+   {% endif %}
+   {% else %}
+   Encara no hi ha membres
+   {% endif %}
+</div>
 </div>
 
 {% else %}

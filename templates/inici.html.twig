@@ -11,6 +11,7 @@
 {% block body %}
 <body>
 <h1 id="titolInici">Projecte Symphony Equips 2n DAW </h1>
+
 <p id="paragrafInici">Inicio programa gestió d'equips del projecte.<br/>
 IES Lluis Simarro 
 Curs 22/23<br/>
@@ -19,6 +20,11 @@ Curs 22/23<br/>
 </p>
 <div id="paragrafInici"><h2 id="titol-llistat">Lista d'equips</h2></div>
 
+<div id="paragrafInici">
+    <div class="nou_membre">
+        <a class="lapiz" href ="{{ path('nou_membre') }}"><img class="r2d2" src="{{ asset('Green/assets/img/decoracio/r2d2.jpg') }}"/> Nou membre d'equip </a></li> 
+    </div>
+</div>
     <div id="paragrafInici">
     <!--<div class="llistat-equips">
         <a href ="{{ path('dades_equip') }}">Equip Roig</a>
