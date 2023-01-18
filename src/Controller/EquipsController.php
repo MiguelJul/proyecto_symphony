@@ -11,6 +11,8 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\HttpFoundation\Request;
+use App\Form\EquipNouType;
+use App\Form\EquipEditarType;
 
 class EquipsController extends AbstractController
 {
@@ -175,14 +177,7 @@ public function inserirmultiple(ManagerRegistry $doctrine)
     {
         $error=null;
         $equip = new Equip();
-        $formulari = $this->createFormBuilder($equip)
-        ->add('nom', TextType::class)
-        ->add('cicle', TextType::class)
-        ->add('curs', TextType::class)
-        ->add('imatge',FileType::class,array('required' => false))
-        ->add('nota', NumberType::class)
-        ->add('save', SubmitType::class, array('label' => 'Enviar'))
-        ->getForm();
+        $formulari = $this->createForm(EquipNouType::class, $equip);
         
         $formulari->handleRequest($request);
         if ($formulari->isSubmitted() && $formulari->isValid()) {
@@ -238,14 +233,7 @@ public function inserirmultiple(ManagerRegistry $doctrine)
         $error=null;
         $repositori = $doctrine->getRepository(Equip::class);
         $equip = $repositori->find($codi);
-        $formulari = $this->createFormBuilder($equip)
-        ->add('nom', TextType::class)
-        ->add('cicle', TextType::class)
-        ->add('curs', TextType::class)
-        ->add('imatge',FileType::class, ['mapped' => false,'required' => false])
-        ->add('nota', NumberType::class)
-        ->add('save', SubmitType::class, array('label' => 'Enviar'))
-        ->getForm();
+        $formulari = $this->createForm(EquipEditarType::class, $equip);
         
         $formulari->handleRequest($request);
         if ($formulari->isSubmitted() && $formulari->isValid()) {
