@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\MembreRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -14,24 +15,37 @@ class Membre
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Assert\NotBlank]
     #[ORM\Column(length: 50)]
     private ?string $nom = null;
 
+    #[Assert\NotBlank]
     #[ORM\Column(length: 100)]
     private ?string $cognoms = null;
 
+    #[Assert\Email(message: "L'email {{ value }} no és vàlid")]
+    #[Assert\NotBlank]
     #[ORM\Column(length: 150, unique:true)]
     private ?string $email = null;
 
     #[ORM\Column(length: 255)]
     private ?string $imatge_perfil = null;
 
+    #[Assert\Range(
+        min: 'first day of January 1950'
+    )]
+    #[Assert\NotBlank]
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $data_naiximent = null;
 
+    #[Assert\Type(type: 'numeric', message: 'El valor {{ value }} es no un valido {{ type }}.')]
+    #[Assert\LessThanOrEqual(10, message: 'La nota ha de ser menor igual que 10')]
+    #[Assert\GreaterThanOrEqual(0, message: 'La nota ha de ser major igual que 0')]
+    #[Assert\NotBlank]
     #[ORM\Column(nullable: true)]
     private ?float $nota = null;
 
+    #[Assert\NotBlank]
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
     private ?Equip $equip = null;

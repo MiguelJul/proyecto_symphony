@@ -6,7 +6,7 @@
 {% endblock %}
 {% block header %}
 {{ parent() }}
-{%endblock%}
+{% endblock %}
 {% block body %}
 {% if error %}
    <body>
@@ -16,7 +16,7 @@
 <img class="imatgeInici" src="{{ asset('Green/assets/img/vader.jpg') }}"/></br>
     <div class="exception">{{error}}</div>
 </div>
-<div id="paragrafInici"><a class="nav-link" href ="{{ path('inici') }}">Tornar a l'inici</a></div>
+<div id="paragrafInici"><a class="nav-link" href ="s">Tornar a l'inici</a></div>
 </body>
 {% else %}
    <body>
@@ -29,8 +29,8 @@ insertit correctament </h2>
 <div id="paragrafInici"><a class="nav-link" href ="{{ path('inici') }}">Tornar a l'inici</a></div>
 </body>
 {% endif %}
-{%endblock%}
+{% endblock %}
 
 {% block footer %}
 {{ parent() }}
-{%endblock%}
+{% endblock %}

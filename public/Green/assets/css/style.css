@@ -19,9 +19,25 @@ body {
 
 }
 
+.nou_membre img{
+   
+  height:50px;
+}
+.nou_membre{
+  width:40%;
+  border:2px solid black;
+  margin:  auto ;
+  background-color: rgb(104, 133, 1);
+}
+
+.lapiz{
+  width:35px;
+  height:35px;
+}
+
 a {
   text-decoration: none;
-  color: #5cb874;
+  color: #444444;
 }
 
 a:hover {
