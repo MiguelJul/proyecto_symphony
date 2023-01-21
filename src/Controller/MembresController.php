@@ -113,7 +113,7 @@ class MembresController extends AbstractController
     }
 
     #[Route('/membre/editar/{codi}' ,name:'edicio_membre', requirements: ['codi' => '\d+'])]
-    public function edicioEquip(ManagerRegistry $doctrine, Request $request, $codi=0)
+    public function edicioEquip(ManagerRegistry $doctrine, Request $request, $codi=1)
     {
         $error=null;
         $repositori = $doctrine->getRepository(Membre::class);

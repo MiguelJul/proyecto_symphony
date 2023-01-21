@@ -237,7 +237,7 @@ public function inserirmultiple(ManagerRegistry $doctrine)
     }
 
     #[Route('/equip/editar/{codi}' ,name:'edicio_equip', requirements: ['codi' => '\d+'])]
-    public function edicioEquip(ManagerRegistry $doctrine, Request $request, $codi=0)
+    public function edicioEquip(ManagerRegistry $doctrine, Request $request, $codi=1)
     {
         $error=null;
         $repositori = $doctrine->getRepository(Equip::class);
