@@ -31,3 +31,6 @@ form{
     width:20%;
 }
 
+#paragrafLogin a:hover{
+    color:#5cb874;
+}
