@@ -35,7 +35,7 @@ class ContacteController extends AbstractController
             $email = (new Email())
             ->from('migjulcal@alu.edu.gva.es')
             ->to($formulari->get("correu")->getData())
-            ->subject('Prova Symfony Mailer!')
+            ->subject('Document de contacte')
             ->text('Membre creat correctament')
             ->html('
             <h1 id="titolInici" style="

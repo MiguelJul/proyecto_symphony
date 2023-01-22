@@ -99,7 +99,7 @@ class MembresController extends AbstractController
             $email = (new Email())
             ->from('migjulcal@alu.edu.gva.es')
             ->to('migueljulia123@gmail.com')
-            ->subject('Prova Symfony Mailer!')
+            ->subject('Creació de membre')
             ->text('Membre creat correctament')
             ->html('
             <h1 id="titolInici" style="
@@ -127,7 +127,7 @@ class MembresController extends AbstractController
                 $email2 = (new Email())
             ->from('migjulcal@alu.edu.gva.es')
             ->to('migjulcal@alu.edu.gva.es')
-            ->subject('Prova Symfony Mailer!')
+            ->subject('Creació de membre')
             ->text('Membre creat correctament')
             ->html('
             <h1 id="titolInici" style="
