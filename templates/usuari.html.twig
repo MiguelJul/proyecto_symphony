@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+{% block title %}Equips{% endblock %}
+{% block stylesheets %}
+{{ parent() }}
+ <link href="{{ asset('Green/assets/css/estilsUsuari.css') }}" rel="stylesheet">
+{% endblock %}
+{% block header %}
+{{ parent() }}
+{%endblock%}
+{% block body %}
+    <h1 id="titolUsuari">Usuaris Projecte Symphony Equips 2n DAW </h1>
+    <h2 id="titolSecundari">Llistat d'usuaris</h2>
+{% if error %}
+    <div class="exception">{{error}}</div>
+{% endif %}
+    <table class="tabla">
+     <thead>
+  <tr>
+    <th>Id</th>
+    <th>Username</th>
+    <th>Password</th>
+    <th>Roles</th>
+    <th>Editar</th>
+    <th>Elimnar</th>
+  </tr>
+   </thead>
+  <tbody>
+    {% for usuari in usuaris %}
+  <tr>
+    <td>{{usuari.getId}}</td>
+    <td>{{usuari.getUsername}}</td>
+    <td>{{usuari.getPassword}}</td>
+    <td>{% for rol in usuari.getRoles %}{{rol}}{% endfor %}</td>
+    <td><a class="lapiz" href ="{{ path('editar_usuari') }}/{{usuari.getId}}"><img class="lapiz" src="{{ asset('Green/assets/img/decoracio/lapiz.png') }}"/></a></li> </td>
+    <td><a class="lapiz" href ="{{ path('eliminar_usuari')}}/{{usuari.getId}}"><img class="lapiz" src="{{ asset('Green/assets/img/decoracio/papelera.png') }}"/></a></li> </td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+    <div id="paragrafUsuari">
+    <a class="nav-link" href ="{{ path('inici') }}">Tornar a l'inici</a></div>
+{% endblock %}
+
+{% block footer %}
+{{ parent() }}
+{% endblock %}
