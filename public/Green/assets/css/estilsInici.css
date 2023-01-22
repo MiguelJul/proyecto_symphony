@@ -75,3 +75,13 @@ background-color:#f2e7c3;
     width:fit-content;
 }
 
+#error{
+    position: relative;
+    width:30%;
+    border: solid blue 2px;
+    margin: 10px auto;
+    text-align:center;
+    padding:10px;
+    background-color:#f2e7c3;
+}
+

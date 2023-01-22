@@ -26,6 +26,20 @@
 
   <!-- Template Main CSS File -->
   <link href="{{ asset('Green/assets/css/style.css') }}" rel="stylesheet">
+  <style>
+  div.paragrafUsuari{
+    position: relative;
+    width: 40%;
+    border: solid black 1px;
+    margin: 10px auto;
+    text-align:center;
+    padding:10px;
+    background-color:#f1d063;
+  }
+  .paragrafUsuari a:hover{
+   color:#5cb874;
+}
+  </style>
  
 {% endblock %}
   <!-- =======================================================
@@ -68,15 +82,16 @@
           <li><a class="nav-link scrollto" href="#services">Services</a></li>
           <li><a class="nav-link scrollto " href="#portfolio">Portfolio</a></li>
           <li><a class="nav-link scrollto" href="#team">Team</a></li>
+          {% if is_granted('ROLE_ADMIN') %}
           <li class="dropdown"><a href="#"><span>Datos</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="#">Drop Down1</a></li>
+              <li><a href="{{ path('usuari') }}">Usuaris</a></li>
               <li class="dropdown"><a href="#"><span>Inserir</span> <i class="bi bi-chevron-right"></i></a>
                 <ul>
                   <li><a href="{{ path('nou_equip') }}">Equip</a></li>
                   <li><a href="{{ path('inserir_equips') }}">Multiples Equips</a></li>
                   <li><a href="{{ path('nou_membre') }}">Membre</a></li>
-                  <li><a href="#">Deep Drop Down 4</a></li>
+                  <li><a href="{{ path('nou_usuari') }}">Usuari</a></li>
                   <li><a href="#">Deep Drop Down 5</a></li>
                 </ul>
               </li>
@@ -85,6 +100,7 @@
               <li><a href="#">Drop Down 4</a></li>
             </ul>
           </li>
+          {% endif %}
           <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
           <li><a class="getstarted scrollto" href="#about">Get Started</a></li>
         </ul>
@@ -93,7 +109,13 @@
 
     </div>
   </header><!-- End Header -->
-  {%endblock%}
+  {% endblock %}
+  {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+<div class="paragrafUsuari">
+Benvingut/da, {{ app.user.username }}
+<a href ="{{ path('logout') }}">Tancar sessió</a>
+</div>
+{% endif %}
 {% block body %}
   <!-- ======= Hero Section ======= -->
   <section id="hero">

@@ -1,0 +1,19 @@
+{# templates/bundles/TwigBundle/Exception/error403.html.twig #}
+{% extends 'base.html.twig' %}
+{% block title %}Editar equipo{% endblock %}
+{% block stylesheets %}
+{{ parent() }}
+ <link href="{{ asset('Green/assets/css/estilsInici.css') }}" rel="stylesheet">
+{% endblock %}
+{% block header %}
+{{ parent() }}
+{% endblock %}
+{% block body %}
+    <h1 id="titolInici">Acces prohibit</h1>
+    <div id="error"><h2 id="titol-llistat">Error 403</h2></div>
+     <div id="paragrafInici"><img class="imatgeInici" src="{{ asset('Green/assets/img/decoracio/error_404.jpg') }}"/></div>
+      <div id="paragrafInici"><a class="nav-link" href ="{{ path('inici') }}">Tornar a l'inici</a></div>
+{% endblock %}
+{% block footer %}
+{{ parent() }}
+{% endblock %}

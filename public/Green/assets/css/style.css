@@ -16,7 +16,14 @@ body {
   position: relative;
   font-family: "Open Sans", sans-serif;
   color: #444444;
-
+}
+ 
+.exception{
+  border:2px solid red;
+  padding: 5px;
+  background-color: lightblue;
+  width:55%;
+  margin: auto;
 }
 
 .nou_membre img{

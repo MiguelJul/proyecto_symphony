@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+{% block title %}Login Contactes{% endblock %}
+{% block stylesheets %}
+{{ parent() }}
+ <link href="{{ asset('Green/assets/css/estilsLogin.css') }}" rel="stylesheet">
+{% endblock %}
+{% block header %}
+{{ parent() }}
+{% endblock %}
+{% block body %}
+<h1 id="titolLogin">Iniciar Sessio:</h1>
+<div id="paragrafLogin">
+{% if error %}
+<div>{{ error.messageKey }}</div>
+{% endif %}
+<form action="{{ path('login') }}" method="post">
+<label for="username">Usuari:</label>
+<input type="text" id="username" name="_username" value="{{ lastUsername }}" />
+<label for="password">Constrasenya:</label>
+<input type="password" id="password" name="_password" />
+<button type="submit">Entrar</button>
+</form>
+</div>
+<div id="paragrafLogin"><a class="nav-link" href ="{{ path('inici') }}">Tornar a l'inici</a></div>
+{% endblock %}
+{% block footer %}
+{{ parent() }}
+{% endblock %}

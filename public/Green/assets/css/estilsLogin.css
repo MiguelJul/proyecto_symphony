@@ -1,0 +1,36 @@
+body{
+    background-color: lightgreen;
+   }
+   
+h1#titolLogin {
+    width: 50%;
+    color: red;
+    border: solid red 1px;
+    margin: 10px auto;
+    text-align:center;
+    padding:10px;
+    background-color:white;
+}
+
+div#paragrafLogin{
+    position: relative;
+    width: 80%;
+    border: solid black 1px;
+    margin: 10px auto;
+    text-align:center;
+    padding:10px;
+    background-color:#f2e7c3;
+}
+form{
+    font-size: 20px;
+}
+#username{
+    width:20%;
+}
+#password{
+    width:20%;
+}
+
+#paragrafLogin a:hover{
+    color:#5cb874;
+}

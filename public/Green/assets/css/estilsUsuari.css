@@ -1,0 +1,65 @@
+body{
+ background-color: lightgreen;
+}
+
+h1#titolUsuari{
+    width: 50%;
+    color: red;
+    border: solid red 1px;
+    margin: 10px auto;
+    text-align:center;
+    padding:10px;
+    background-color:white;
+    }
+
+h2#titolSecundari{
+    width: 50%;
+    color: blue;
+    border: solid red 1px;
+    margin: 10px auto;
+    text-align:center;
+    padding:10px;
+    background-color:white;
+    }
+
+#paragrafUsuari{
+position: relative;
+width: 80%;
+border: solid black 1px;
+margin: 10px auto;
+text-align:center;
+padding:10px;
+background-color:#f2e7c3;
+}
+
+
+#paragrafUsuaria:hover{
+    color:#5cb874;
+}
+th,td{
+    overflow: hidden;
+    padding:10px 20px 10px 20px;
+}
+thead{
+    background-color: azure;
+}
+tbody tr:nth-child(odd) {
+    background-color: #f8cc3c;
+  }
+  
+  tbody tr:nth-child(even) {
+    background-color: #ffe799;
+  }
+
+.tabla{
+    margin: auto;
+    font-size: 10px;
+    width: 80%;
+    border-collapse: collapse;
+    border: 2px solid black;
+}
+
+td{
+    overflow: hidden;
+}
+
