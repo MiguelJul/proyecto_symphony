@@ -37,6 +37,30 @@ public function __construct($dadesEquips)
 {
 $this->equips = $dadesEquips->get();
 }
+#[Route('/equip' ,name:'dades_equips', requirements: ['codi' => '\d+'])]
+    public function equips(ManagerRegistry $doctrine,$codi=1)
+    {
+    $repositori = $doctrine->getRepository(Equip::class);
+    $equips=$repositori->findAll();
+    /*foreach ($repositori2 as $membre){
+        echo ($membre);
+        if($membre.getEquip()==$equip.getNom())
+        array_push($membres,$membre);
+    }*/
+    /*
+    $resultat = array_filter($this->equips,
+    function($equip) use ($codi)
+    {
+    return $equip["codi"] == $codi;
+    });*/
+    
+    if ($equips!=null){
+    return $this->render('dades_equips.html.twig', array('equips'=>$equips));
+    }
+    else
+    return $this->render('dades_equips.html.twig', array(
+        'equips' => NULL));
+}
 
 #[Route('/equip/{codi}' ,name:'dades_equip', requirements: ['codi' => '\d+'])]
     public function fitxa(ManagerRegistry $doctrine,$codi=1)
@@ -64,7 +88,6 @@ $this->equips = $dadesEquips->get();
     return $this->render('equip.html.twig', array(
         'equip' => NULL,'codi'=>NULL,'membres'=>NULL));
 }
-
 
 #[Route('/filrarnotes/nota/{nota}' ,name:'filtro_nota', requirements: ['codi' => '\d+'])]
     public function fitrar(ManagerRegistry $doctrine,$nota=0)

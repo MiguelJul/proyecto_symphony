@@ -11,11 +11,15 @@
 
 body {
   margin:0;
-  padding-bottom:310px;
   min-height: 100vh;
   position: relative;
   font-family: "Open Sans", sans-serif;
   color: #444444;
+}
+
+.footer-link{
+  list-style:none;
+  color:white;
 }
  
 .exception{
@@ -1441,7 +1445,7 @@ section {
 # Footer
 --------------------------------------------------------------*/
 #footer {
-  position: absolute;
+  position: relative;
   width:100%;
   bottom:0;
   background: #090909;
