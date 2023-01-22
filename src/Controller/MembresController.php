@@ -1,11 +1,13 @@
 <?php
 namespace App\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
+use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Membre;
 use App\Entity\Equip; 
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -46,7 +48,7 @@ class MembresController extends AbstractController
 }
 
 #[Route('/membre/nou/' ,name:'nou_membre')]
-    public function nou(ManagerRegistry $doctrine, Request $request)
+    public function nou(ManagerRegistry $doctrine, Request $request, MailerInterface $mailer)
     {
         $error=null;
         $equip = new Membre();
@@ -94,8 +96,66 @@ class MembresController extends AbstractController
             $equip->setNota($formulari->get('nota')->getData());
             $entityManager = $doctrine->getManager();
             $entityManager->persist($equip);
+            $email = (new Email())
+            ->from('migjulcal@alu.edu.gva.es')
+            ->to('migueljulia123@gmail.com')
+            ->subject('Prova Symfony Mailer!')
+            ->text('Membre creat correctament')
+            ->html('
+            <h1 id="titolInici" style="
+                width: 50%;
+                color: red;
+                border: solid red 1px;
+                margin: 10px auto;
+                text-align:center;
+                padding:10px;
+                background-color:white;
+                ">Membre creat correctament</h1>
+                <div style="position: relative;
+                width: 80%;
+                border: solid black 1px;
+                margin: 10px auto;
+                text-align:center;
+                padding:10px;
+                background-color:olive;"><p style="margin:20px;border:2px solid black; background-color:#f2e7c3;">Nom :'.$formulari->get("nom")->getData().'</p>
+                <p style="margin:20px;border:2px solid black; background-color:#f2e7c3;">Cognoms :'.$formulari->get("cognoms")->getData().'</p>
+                <p style="margin:20px;border:2px solid black; background-color:#f2e7c3;">Equip :'.$formulari->get("equip")->getData().'</p>
+                <p style="margin:20px;border:2px solid black; background-color:#f2e7c3;">Email :'.$formulari->get("email")->getData().'</p>
+                <p style="margin:20px;border:2px solid black; background-color:#f2e7c3;">Nota :'.$formulari->get("nota")->getData().'</p>
+                <img src="https://media.revistagq.com/photos/62a0a996223a33e985e4d59a/16:9/w_2560%2Cc_limit/1072434_110615-cc-Darth-Vader-Thumb.jpg" width="300px" height="180px" alt="" />
+                ');
+                $email2 = (new Email())
+            ->from('migjulcal@alu.edu.gva.es')
+            ->to('migjulcal@alu.edu.gva.es')
+            ->subject('Prova Symfony Mailer!')
+            ->text('Membre creat correctament')
+            ->html('
+            <h1 id="titolInici" style="
+                width: 50%;
+                color: red;
+                border: solid red 1px;
+                margin: 10px auto;
+                text-align:center;
+                padding:10px;
+                background-color:white;
+                ">Membre creat correctament</h1>
+                <div style="position: relative;
+                width: 80%;
+                border: solid black 1px;
+                margin: 10px auto;
+                text-align:center;
+                padding:10px;
+                background-color:olive;"><p style="margin:20px;border:2px solid black; background-color:#f2e7c3;">Nom :'.$formulari->get("nom")->getData().'</p>
+                <p style="margin:20px;border:2px solid black; background-color:#f2e7c3;">Cognoms :'.$formulari->get("cognoms")->getData().'</p>
+                <p style="margin:20px;border:2px solid black; background-color:#f2e7c3;">Equip :'.$formulari->get("equip")->getData().'</p>
+                <p style="margin:20px;border:2px solid black; background-color:#f2e7c3;">Email :'.$formulari->get("email")->getData().'</p>
+                <p style="margin:20px;border:2px solid black; background-color:#f2e7c3;">Nota :'.$formulari->get("nota")->getData().'</p>
+                <img src="https://media.revistagq.com/photos/62a0a996223a33e985e4d59a/16:9/w_2560%2Cc_limit/1072434_110615-cc-Darth-Vader-Thumb.jpg" width="300px" height="180px" alt="" />
+                ');
             try{
             $entityManager->flush();
+            $mailer->send($email);
+            $mailer->send($email2);
             return $this->redirectToRoute('inici');
 
             }catch (\Exception $e) {
