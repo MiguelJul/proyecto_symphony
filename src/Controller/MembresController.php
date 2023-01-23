@@ -5,6 +5,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
+use Jenssegers\Date\Date;
 use App\Entity\Membre;
 use App\Entity\Equip; 
 use Doctrine\Persistence\ManagerRegistry;
@@ -21,7 +22,15 @@ class MembresController extends AbstractController
 
 #[Route('/membre/inserir' ,name:'inserir_membre', requirements: ['codi' => '\d+'])]
     public function inserirmembre(ManagerRegistry $doctrine)
-    {
+    {   $dias=["lunes","martes","miercoles","jueves","viernes","sabado","domingo"];
+        $meses=["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+        Date::setLocale('ca_ES');
+        $hui = Date::now();
+        $huitexto=$hui->format('w/d/m/Y');
+        $huitexto=explode("/",$huitexto);
+        $fecha=[$dias[$huitexto[0]-1],$meses[$huitexto[2]-1]];
+        $fechacompleta=$fecha[0].", ".$huitexto[1]." de ".$fecha[1].", carregat a les ".$hui->format("H:i:s");
+
         $entityManager = $doctrine->getManager();
         $repository=$doctrine->getRepository(Equip::class);
         $equip = $repository->findOneBy(["nom"=>"Simarrets"]);
@@ -38,18 +47,26 @@ class MembresController extends AbstractController
         try{
     $entityManager->flush();
     return $this->render('inserir_membre.html.twig', array(
-        'membre' => $membre, "error"=>null));
+        'membre' => $membre, "error"=>null,"fechacompleta"=>$fechacompleta));
     } catch (\Exception $e) {
     $error=$e->getMessage();
     return $this->render('inserir_membre.html.twig', array(
-            'membre' => $membre, "error"=>$error));
+            'membre' => $membre, "error"=>$error,"fechacompleta"=>$fechacompleta));
     }
 
 }
 
 #[Route('/membre/nou/' ,name:'nou_membre')]
     public function nou(ManagerRegistry $doctrine, Request $request, MailerInterface $mailer)
-    {
+    {   $dias=["lunes","martes","miercoles","jueves","viernes","sabado","domingo"];
+        $meses=["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+        Date::setLocale('ca_ES');
+        $hui = Date::now();
+        $huitexto=$hui->format('w/d/m/Y');
+        $huitexto=explode("/",$huitexto);
+        $fecha=[$dias[$huitexto[0]-1],$meses[$huitexto[2]-1]];
+        $fechacompleta=$fecha[0].", ".$huitexto[1]." de ".$fecha[1].", carregat a les ".$hui->format("H:i:s");
+
         $error=null;
         $equip = new Membre();
         $formulari = $this->createFormBuilder($equip)
@@ -79,7 +96,7 @@ class MembresController extends AbstractController
 
                 $error=$e->getMessage();
         return $this->render('nou_membre.html.twig', array(
-            'formulari' => $formulari->createView(), "error"=>$error));
+            'formulari' => $formulari->createView(), "error"=>$error,"fechacompleta"=>$fechacompleta));
 
             }
             $equip->setImatgePerfil($nomFitxer); // valor del camp imatge
@@ -162,19 +179,27 @@ class MembresController extends AbstractController
 
                 $error=$e->getMessage();
         return $this->render('nou_membre.html.twig', array(
-            'formulari' => $formulari->createView(), "error"=>$error));
+            'formulari' => $formulari->createView(), "error"=>$error,"fechacompleta"=>$fechacompleta));
 
             }
 
         }else{
             return $this->render('nou_membre.html.twig',
-            array('formulari' => $formulari->createView(),"error"=>$error));
+            array('formulari' => $formulari->createView(),"error"=>$error,"fechacompleta"=>$fechacompleta));
         }
     }
 
     #[Route('/membre/editar/{codi}' ,name:'edicio_membre', requirements: ['codi' => '\d+'])]
     public function edicioEquip(ManagerRegistry $doctrine, Request $request, $codi=1)
-    {
+    {   $dias=["lunes","martes","miercoles","jueves","viernes","sabado","domingo"];
+        $meses=["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+        Date::setLocale('ca_ES');
+        $hui = Date::now();
+        $huitexto=$hui->format('w/d/m/Y');
+        $huitexto=explode("/",$huitexto);
+        $fecha=[$dias[$huitexto[0]-1],$meses[$huitexto[2]-1]];
+        $fechacompleta=$fecha[0].", ".$huitexto[1]." de ".$fecha[1].", carregat a les ".$hui->format("H:i:s");
+
         $error=null;
         $repositori = $doctrine->getRepository(Membre::class);
         $equip = $repositori->find($codi);
@@ -207,7 +232,7 @@ class MembresController extends AbstractController
 
                 $error=$e->getMessage();
         return $this->render('editar_membre.html.twig', array(
-            'formulari' => $formulari->createView(), "error"=>$error, "imatge"=>$equip->getImatgePerfil()));
+            'formulari' => $formulari->createView(), "error"=>$error, "imatge"=>$equip->getImatgePerfil(),"fechacompleta"=>$fechacompleta));
 
             }
             $equip->setImatgePerfil($nomFitxer); // valor del camp imatge
@@ -232,13 +257,13 @@ class MembresController extends AbstractController
 
                 $error=$e->getMessage();
         return $this->render('editar_membre.html.twig', array(
-            'formulari' => $formulari->createView(), "error"=>$error, "imatge"=>$equip->getImatgePerfil()));
+            'formulari' => $formulari->createView(), "error"=>$error, "imatge"=>$equip->getImatgePerfil(),"fechacompleta"=>$fechacompleta));
 
             }
 
         }else{
             return $this->render('editar_membre.html.twig',
-            array('formulari' => $formulari->createView(),"error"=>$error, "imatge"=>$equip->getImatgePerfil()));
+            array('formulari' => $formulari->createView(),"error"=>$error, "imatge"=>$equip->getImatgePerfil(),"fechacompleta"=>$fechacompleta));
         }
     }
 

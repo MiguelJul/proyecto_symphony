@@ -104,10 +104,13 @@
   </header><!-- End Header -->
   {% endblock %}
   {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+   {% if fechacompleta %}
 <div class="paragrafUsuari">
-Benvingut/da, {{ app.user.username }}
-<a href ="{{ path('logout') }}">Tancar sessió</a>
+Benvingut/da, {{ app.user.username }} <a href ="{{ path('logout') }}">Tancar sessió</a>. {{ fechacompleta }}
 </div>
+ {% else %}
+ Benvingut/da, {{ app.user.username }}
+ {% endif %}
 {% endif %}
 {% block body %}
   <!-- ======= Hero Section ======= -->

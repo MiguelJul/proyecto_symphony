@@ -1,5 +1,6 @@
 <?php
 namespace App\Controller;
+use Jenssegers\Date\Date;
 use App\Entity\Contacte;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Mailer\MailerInterface;
@@ -20,7 +21,15 @@ class ContacteController extends AbstractController
     
     #[Route('/contacte' ,name:'contacte')]
     public function inici(ManagerRegistry $doctrine,Request $request, MailerInterface $mailer)
-    {
+    {   $dias=["lunes","martes","miercoles","jueves","viernes","sabado","domingo"];
+        $meses=["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+        Date::setLocale('ca_ES');
+        $hui = Date::now();
+        $huitexto=$hui->format('w/d/m/Y');
+        $huitexto=explode("/",$huitexto);
+        $fecha=[$dias[$huitexto[0]-1],$meses[$huitexto[2]-1]];
+        $fechacompleta=$fecha[0].", ".$huitexto[1]." de ".$fecha[1].", carregat a les ".$hui->format("H:i:s");
+
         $error=null;
         $equip = new Contacte();
         $formulari = $this->createFormBuilder($equip)
@@ -65,13 +74,13 @@ class ContacteController extends AbstractController
     
                     $error=$e->getMessage();
             return $this->render('contacte.html.twig', array(
-                'formulari' => $formulari->createView(), "error"=>$error));
+                'formulari' => $formulari->createView(), "error"=>$error,"fechacompleta"=>$fechacompleta));
     
                 }
         }
         else{
             return $this->render('contacte.html.twig',
-            array('formulari' => $formulari->createView(),"error"=>$error));
+            array('formulari' => $formulari->createView(),"error"=>$error,"fechacompleta"=>$fechacompleta));
         }
     }
 

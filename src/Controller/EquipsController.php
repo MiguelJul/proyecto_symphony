@@ -1,5 +1,6 @@
 <?php
 namespace App\Controller;
+use Jenssegers\Date\Date;
 use App\Entity\Equip;
 use App\Entity\Membre;
 use App\Service\ServeiDadesEquips;  
@@ -39,7 +40,15 @@ $this->equips = $dadesEquips->get();
 }
 #[Route('/equip' ,name:'dades_equips', requirements: ['codi' => '\d+'])]
     public function equips(ManagerRegistry $doctrine,$codi=1)
-    {
+    {$dias=["lunes","martes","miercoles","jueves","viernes","sabado","domingo"];
+        $meses=["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+        Date::setLocale('ca_ES');
+        $hui = Date::now();
+        $huitexto=$hui->format('w/d/m/Y');
+        $huitexto=explode("/",$huitexto);
+        $fecha=[$dias[$huitexto[0]-1],$meses[$huitexto[2]-1]];
+        $fechacompleta=$fecha[0].", ".$huitexto[1]." de ".$fecha[1].", carregat a les ".$hui->format("H:i:s");
+
     $repositori = $doctrine->getRepository(Equip::class);
     $equips=$repositori->findAll();
     /*foreach ($repositori2 as $membre){
@@ -55,16 +64,25 @@ $this->equips = $dadesEquips->get();
     });*/
     
     if ($equips!=null){
-    return $this->render('dades_equips.html.twig', array('equips'=>$equips));
+    return $this->render('dades_equips.html.twig', array('equips'=>$equips,"fechacompleta"=>$fechacompleta));
     }
     else
     return $this->render('dades_equips.html.twig', array(
-        'equips' => NULL));
+        'equips' => NULL,"fechacompleta"=>$fechacompleta));
 }
 
 #[Route('/equip/{codi}' ,name:'dades_equip', requirements: ['codi' => '\d+'])]
     public function fitxa(ManagerRegistry $doctrine,$codi=1)
-    {
+    {$dias=["lunes","martes","miercoles","jueves","viernes","sabado","domingo"];
+        $meses=["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+        Date::setLocale('ca_ES');
+        $hui = Date::now();
+        $huitexto=$hui->format('w/d/m/Y');
+        $huitexto=explode("/",$huitexto);
+        $fecha=[$dias[$huitexto[0]-1],$meses[$huitexto[2]-1]];
+        $fechacompleta=$fecha[0].", ".$huitexto[1]." de ".$fecha[1].", carregat a les ".$hui->format("H:i:s");
+
+
     $repositori = $doctrine->getRepository(Equip::class);
     $repositori2 = $doctrine->getRepository(Membre::class);
     $equip = $repositori->find($codi);
@@ -82,16 +100,23 @@ $this->equips = $dadesEquips->get();
     });*/
     
     if ($equip!=null){
-    return $this->render('equip.html.twig', array('equip'=>$equip,'codi'=>$codi,'membres'=>$membres));
+    return $this->render('equip.html.twig', array('equip'=>$equip,'codi'=>$codi,'membres'=>$membres,"fechacompleta"=>$fechacompleta));
     }
     else
     return $this->render('equip.html.twig', array(
-        'equip' => NULL,'codi'=>NULL,'membres'=>NULL));
+        'equip' => NULL,'codi'=>NULL,'membres'=>NULL,"fechacompleta"=>$fechacompleta));
 }
 
 #[Route('/filrarnotes/nota/{nota}' ,name:'filtro_nota', requirements: ['codi' => '\d+'])]
     public function fitrar(ManagerRegistry $doctrine,$nota=0)
-    {
+    {$dias=["lunes","martes","miercoles","jueves","viernes","sabado","domingo"];
+        $meses=["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+        Date::setLocale('ca_ES');
+        $hui = Date::now();
+        $huitexto=$hui->format('w/d/m/Y');
+        $huitexto=explode("/",$huitexto);
+        $fecha=[$dias[$huitexto[0]-1],$meses[$huitexto[2]-1]];
+        $fechacompleta=$fecha[0].", ".$huitexto[1]." de ".$fecha[1].", carregat a les ".$hui->format("H:i:s");
         
         $repositori = $doctrine->getRepository(Equip::class);
         
@@ -99,10 +124,10 @@ $this->equips = $dadesEquips->get();
         $equipssort=rsort($equips);
 
     if ($equips!=null)
-    return $this->render('filtrar_notes_equip.html.twig', array('equips'=>$equips));
+    return $this->render('filtrar_notes_equip.html.twig', array('equips'=>$equips,"fechacompleta"=>$fechacompleta));
     else
     return $this->render('filtrar_notes_equip.html.twig', array(
-        'equips' => NULL));
+        'equips' => NULL,"fechacompleta"=>$fechacompleta));
 }
 /*#[Route('/equip/{text}' ,name:'buscar_equips')]
 public function buscar($text)
@@ -136,7 +161,15 @@ return new Response("No s'han trobat equips");
 
 #[Route('/equip/inserir' ,name:'inserir_equip')]
 public function inserir(ManagerRegistry $doctrine)
-{
+{$dias=["lunes","martes","miercoles","jueves","viernes","sabado","domingo"];
+    $meses=["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+    Date::setLocale('ca_ES');
+    $hui = Date::now();
+    $huitexto=$hui->format('w/d/m/Y');
+    $huitexto=explode("/",$huitexto);
+    $fecha=[$dias[$huitexto[0]-1],$meses[$huitexto[2]-1]];
+    $fechacompleta=$fecha[0].", ".$huitexto[1]." de ".$fecha[1].", carregat a les ".$hui->format("H:i:s");
+
     $entityManager = $doctrine->getManager();
     $equip = new equip();
     $equip->setNom("Simarrets");
@@ -148,17 +181,26 @@ public function inserir(ManagerRegistry $doctrine)
     try{
     $entityManager->flush();
     return $this->render('inserir_equip.html.twig', array(
-        'equips' => $equip, "error"=>null));
+        'equips' => $equip, "error"=>null,"fechacompleta"=>$fechacompleta));
     } catch (\Exception $e) {
         $error=$e->getMessage();
         return $this->render('inserir_equip.html.twig', array(
-            'equips' => $equip, "error"=>$error));
+            'equips' => $equip, "error"=>$error,"fechacompleta"=>$fechacompleta));
     }
 }
 
 #[Route('/equip/inserirmultiple' ,name:'inserir_equips')]
 public function inserirmultiple(ManagerRegistry $doctrine)
-{
+{$dias=["lunes","martes","miercoles","jueves","viernes","sabado","domingo"];
+    $meses=["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+    Date::setLocale('ca_ES');
+    $hui = Date::now();
+    $huitexto=$hui->format('w/d/m/Y');
+    $huitexto=explode("/",$huitexto);
+    $fecha=[$dias[$huitexto[0]-1],$meses[$huitexto[2]-1]];
+    $fechacompleta=$fecha[0].", ".$huitexto[1]." de ".$fecha[1].", carregat a les ".$hui->format("H:i:s");
+
+
     $entityManager = $doctrine->getManager();
     $equip1 = new equip();
     $equip1->setNom("Equip Roig");
@@ -196,17 +238,26 @@ public function inserirmultiple(ManagerRegistry $doctrine)
     try{
     $entityManager->flush();
     return $this->render('inserir_equip_multiple.html.twig', array(
-        'equips' => $equips, "error"=>null));
+        'equips' => $equips, "error"=>null,"fechacompleta"=>$fechacompleta));
     } catch (\Exception $e) {
         $error=$e->getMessage();
         return $this->render('inserir_equip_multiple.html.twig', array(
-            'equips' => $equips, "error"=>$error));
+            'equips' => $equips, "error"=>$error,"fechacompleta"=>$fechacompleta));
     }
 }
 
 #[Route('/equip/nou/' ,name:'nou_equip')]
     public function nou(ManagerRegistry $doctrine, Request $request)
-    {
+    {$dias=["lunes","martes","miercoles","jueves","viernes","sabado","domingo"];
+        $meses=["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+        Date::setLocale('ca_ES');
+        $hui = Date::now();
+        $huitexto=$hui->format('w/d/m/Y');
+        $huitexto=explode("/",$huitexto);
+        $fecha=[$dias[$huitexto[0]-1],$meses[$huitexto[2]-1]];
+        $fechacompleta=$fecha[0].", ".$huitexto[1]." de ".$fecha[1].", carregat a les ".$hui->format("H:i:s");
+
+
         $error=null;
         $equip = new Equip();
         $formulari = $this->createForm(EquipNouType::class, $equip);
@@ -226,7 +277,7 @@ public function inserirmultiple(ManagerRegistry $doctrine)
 
                 $error=$e->getMessage();
         return $this->render('nou_equip.html.twig', array(
-            'formulari' => $formulari->createView(), "error"=>$error));
+            'formulari' => $formulari->createView(), "error"=>$error,"fechacompleta"=>$fechacompleta));
 
             }
             $equip->setImatge($nomFitxer); // valor del camp imatge
@@ -249,19 +300,28 @@ public function inserirmultiple(ManagerRegistry $doctrine)
 
                 $error=$e->getMessage();
         return $this->render('nou_equip.html.twig', array(
-            'formulari' => $formulari->createView(), "error"=>$error));
+            'formulari' => $formulari->createView(), "error"=>$error,"fechacompleta"=>$fechacompleta));
 
             }
 
         }else{
             return $this->render('nou_equip.html.twig',
-            array('formulari' => $formulari->createView(),"error"=>$error));
+            array('formulari' => $formulari->createView(),"error"=>$error,"fechacompleta"=>$fechacompleta));
         }
     }
 
     #[Route('/equip/editar/{codi}' ,name:'edicio_equip', requirements: ['codi' => '\d+'])]
     public function edicioEquip(ManagerRegistry $doctrine, Request $request, $codi=1)
-    {
+    {$dias=["lunes","martes","miercoles","jueves","viernes","sabado","domingo"];
+        $meses=["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+        Date::setLocale('ca_ES');
+        $hui = Date::now();
+        $huitexto=$hui->format('w/d/m/Y');
+        $huitexto=explode("/",$huitexto);
+        $fecha=[$dias[$huitexto[0]-1],$meses[$huitexto[2]-1]];
+        $fechacompleta=$fecha[0].", ".$huitexto[1]." de ".$fecha[1].", carregat a les ".$hui->format("H:i:s");
+
+
         $error=null;
         $repositori = $doctrine->getRepository(Equip::class);
         $equip = $repositori->find($codi);
@@ -285,7 +345,7 @@ public function inserirmultiple(ManagerRegistry $doctrine)
 
                 $error=$e->getMessage();
         return $this->render('editar_equip.html.twig', array(
-            'formulari' => $formulari->createView(), "error"=>$error, "imatge"=>$equip->getImatge()));
+            'formulari' => $formulari->createView(), "error"=>$error, "imatge"=>$equip->getImatge(),"fechacompleta"=>$fechacompleta));
 
             }
             $equip->setImatge($nomFitxer); // valor del camp imatge
@@ -306,13 +366,13 @@ public function inserirmultiple(ManagerRegistry $doctrine)
 
                 $error=$e->getMessage();
         return $this->render('editar_equip.html.twig', array(
-            'formulari' => $formulari->createView(), "error"=>$error,"imatge"=>$equip->getImatge()));
+            'formulari' => $formulari->createView(), "error"=>$error,"imatge"=>$equip->getImatge(),"fechacompleta"=>$fechacompleta));
 
             }
 
         }else{
             return $this->render('editar_equip.html.twig',
-            array('formulari' => $formulari->createView(),"error"=>$error,"imatge"=>$equip->getImatge()));
+            array('formulari' => $formulari->createView(),"error"=>$error,"imatge"=>$equip->getImatge(),"fechacompleta"=>$fechacompleta));
         }
     }
 }
